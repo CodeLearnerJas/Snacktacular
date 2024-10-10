@@ -10,6 +10,11 @@ import Firebase
 import FirebaseAuth
 
 struct LoginView: View {
+    enum Field {
+        case email, password
+    }
+    @FocusState private var focusedField: Field?
+    @State private var buttonDisabled: Bool = true
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var alertMessage = ""
@@ -27,10 +32,24 @@ struct LoginView: View {
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .submitLabel(.next)
+                    .focused($focusedField, equals: .email)
+                    .onSubmit {
+                        focusedField = .password
+                    }
+                    .onChange(of: email) { oldValue, _ in
+                        enableButtons()
+                    }
                 
                 SecureField("Password", text: $password)
                     .textInputAutocapitalization(.never)
                     .submitLabel(.done)
+                    .focused($focusedField, equals: .password)
+                    .onSubmit {
+                        focusedField = nil
+                    }
+                    .onChange(of: password) { oldValue, _ in
+                        enableButtons()
+                    }
             }
             .textFieldStyle(.roundedBorder)
             .overlay{
@@ -54,6 +73,7 @@ struct LoginView: View {
                 }
                 .padding(.leading, 5.0)
             }
+            .disabled(buttonDisabled)
             .buttonStyle(.borderedProminent)
             .tint(Color("SnackColor"))
             .font(.title2)
@@ -65,6 +85,13 @@ struct LoginView: View {
                 Text("OK")
             }
 
+        }
+    }
+    func enableButtons() {
+        let validEmail = email.count > 6 && email.contains("@")
+        let validPassword = password.count >= 6
+        if validEmail && validPassword {
+            buttonDisabled = false
         }
     }
     func register(){
