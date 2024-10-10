@@ -6,6 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6A18E15E2CB7408F00F13D02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A18E1572CB7408F00F13D02 /* Preview Assets.xcassets */; };
+		6A18E15F2CB7408F00F13D02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A18E1592CB7408F00F13D02 /* Assets.xcassets */; };
+		6A18E1612CB7408F00F13D02 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A18E15A2CB7408F00F13D02 /* LoginView.swift */; };
+		6A18E1622CB7408F00F13D02 /* SnacktacularApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A18E15C2CB7408F00F13D02 /* SnacktacularApp.swift */; };
+		6A18E1652CB745DD00F13D02 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6A18E1642CB745DD00F13D02 /* FirebaseAuth */; };
+		6A18E1672CB745DD00F13D02 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6A18E1662CB745DD00F13D02 /* FirebaseFirestore */; };
+		6A18E1692CB745DD00F13D02 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6A18E1682CB745DD00F13D02 /* FirebaseStorage */; };
+		6A18E16B2CB748F900F13D02 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A18E16A2CB748F900F13D02 /* GoogleService-Info.plist */; };
+		6A18E16C2CB748F900F13D02 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A18E16A2CB748F900F13D02 /* GoogleService-Info.plist */; };
+		6A18E16D2CB748F900F13D02 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A18E16A2CB748F900F13D02 /* GoogleService-Info.plist */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		6A18E1392CB73EC700F13D02 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,14 +40,15 @@
 		6A18E1282CB73EC600F13D02 /* Snacktacular.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snacktacular.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A18E1382CB73EC700F13D02 /* SnacktacularTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnacktacularTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A18E1422CB73EC700F13D02 /* SnacktacularUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnacktacularUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A18E1572CB7408F00F13D02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6A18E1592CB7408F00F13D02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6A18E15A2CB7408F00F13D02 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		6A18E15B2CB7408F00F13D02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A18E15C2CB7408F00F13D02 /* SnacktacularApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnacktacularApp.swift; sourceTree = "<group>"; };
+		6A18E16A2CB748F900F13D02 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		6A18E12A2CB73EC600F13D02 /* Snacktacular */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Snacktacular;
-			sourceTree = "<group>";
-		};
 		6A18E13B2CB73EC700F13D02 /* SnacktacularTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SnacktacularTests;
@@ -52,6 +66,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A18E1652CB745DD00F13D02 /* FirebaseAuth in Frameworks */,
+				6A18E1672CB745DD00F13D02 /* FirebaseFirestore in Frameworks */,
+				6A18E1692CB745DD00F13D02 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,7 +92,7 @@
 		6A18E11F2CB73EC600F13D02 = {
 			isa = PBXGroup;
 			children = (
-				6A18E12A2CB73EC600F13D02 /* Snacktacular */,
+				6A18E15D2CB7408F00F13D02 /* Snacktacular */,
 				6A18E13B2CB73EC700F13D02 /* SnacktacularTests */,
 				6A18E1452CB73EC700F13D02 /* SnacktacularUITests */,
 				6A18E1292CB73EC600F13D02 /* Products */,
@@ -90,6 +107,27 @@
 				6A18E1422CB73EC700F13D02 /* SnacktacularUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6A18E1582CB7408F00F13D02 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6A18E1572CB7408F00F13D02 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6A18E15D2CB7408F00F13D02 /* Snacktacular */ = {
+			isa = PBXGroup;
+			children = (
+				6A18E1582CB7408F00F13D02 /* Preview Content */,
+				6A18E15C2CB7408F00F13D02 /* SnacktacularApp.swift */,
+				6A18E15A2CB7408F00F13D02 /* LoginView.swift */,
+				6A18E1592CB7408F00F13D02 /* Assets.xcassets */,
+				6A18E15B2CB7408F00F13D02 /* Info.plist */,
+				6A18E16A2CB748F900F13D02 /* GoogleService-Info.plist */,
+			);
+			path = Snacktacular;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,11 +145,11 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				6A18E12A2CB73EC600F13D02 /* Snacktacular */,
-			);
 			name = Snacktacular;
 			packageProductDependencies = (
+				6A18E1642CB745DD00F13D02 /* FirebaseAuth */,
+				6A18E1662CB745DD00F13D02 /* FirebaseFirestore */,
+				6A18E1682CB745DD00F13D02 /* FirebaseStorage */,
 			);
 			productName = Snacktacular;
 			productReference = 6A18E1282CB73EC600F13D02 /* Snacktacular.app */;
@@ -195,6 +233,9 @@
 			);
 			mainGroup = 6A18E11F2CB73EC600F13D02;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				6A18E1632CB745DD00F13D02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6A18E1292CB73EC600F13D02 /* Products */;
 			projectDirPath = "";
@@ -212,6 +253,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A18E15E2CB7408F00F13D02 /* Preview Assets.xcassets in Resources */,
+				6A18E15F2CB7408F00F13D02 /* Assets.xcassets in Resources */,
+				6A18E16C2CB748F900F13D02 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A18E16D2CB748F900F13D02 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A18E16B2CB748F900F13D02 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +282,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A18E1612CB7408F00F13D02 /* LoginView.swift in Sources */,
+				6A18E1622CB7408F00F13D02 /* SnacktacularApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,9 +447,9 @@
 				DEVELOPMENT_TEAM = 92Y266UM5W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Snacktacular/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -428,9 +476,9 @@
 				DEVELOPMENT_TEAM = 92Y266UM5W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Snacktacular/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -558,6 +606,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6A18E1632CB745DD00F13D02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6A18E1642CB745DD00F13D02 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A18E1632CB745DD00F13D02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		6A18E1662CB745DD00F13D02 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A18E1632CB745DD00F13D02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		6A18E1682CB745DD00F13D02 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A18E1632CB745DD00F13D02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6A18E1202CB73EC600F13D02 /* Project object */;
 }
