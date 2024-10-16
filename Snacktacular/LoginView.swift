@@ -19,9 +19,10 @@ struct LoginView: View {
     @State private var password: String = ""
     @State private var alertMessage = ""
     @State private var showingAlert: Bool = false
+    @State private var path = NavigationPath()
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             Image("logo")
                 .resizable()
                 .scaledToFit()
@@ -79,13 +80,24 @@ struct LoginView: View {
             .font(.title2)
             .padding()
             .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(for: String.self) { view in
+                if view == "ListView" {
+                    ListView()
+                }
+            }
         }
         .alert(alertMessage, isPresented: $showingAlert) {
             Button(role: .cancel) {} label: {
                 Text("OK")
             }
-
         }
+        .onAppear{
+            if Auth.auth().currentUser != nil {
+                print("Welcome back")
+                path.append("ListView")
+            }
+        }
+        
     }
     func enableButtons() {
         let validEmail = email.count > 6 && email.contains("@")
@@ -102,7 +114,7 @@ struct LoginView: View {
                 showingAlert = true
             } else {
                 print("😎 Thanks for your registration!")
-                //TODO: Load ListView
+                path.append("ListView")
             }
         }
     }
@@ -114,12 +126,14 @@ struct LoginView: View {
                 showingAlert = true
             } else {
                 print("Successfully logged in!")
-                //TODO: Load ListView
+                path.append("ListView")
             }
         }
     }
 }
 
 #Preview {
-    LoginView()
+    NavigationStack {
+        LoginView()
+    }
 }

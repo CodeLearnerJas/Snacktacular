@@ -3,7 +3,7 @@
 //  Snacktacular
 //
 //  Created by GuitarLearnerJas on 10/10/2024.
-//
+//TODO: Debug why CPU overload
 
 import SwiftUI
 import FirebaseCore
@@ -20,10 +20,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct SnacktacularApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var spotVM = SpotViewModel()
+    @StateObject var locationManager = LocationManager()
     
     var body: some Scene {
         WindowGroup {
             LoginView()
+                .environmentObject(spotVM)
+                .environmentObject(locationManager)
         }
     }
 }
