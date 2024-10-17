@@ -3,19 +3,31 @@
 //  Snacktacular
 //
 //  Created by GuitarLearnerJas on 11/10/2024.
-//
+//TODO: Optional: Fix the deprecation on MapAnnotation
 
 import SwiftUI
 import MapKit
 
 struct SpotDetailView: View {
+    
+    struct Annotation: Identifiable { //Hold the id and coordinates before saving to firebase cloud
+        let id = UUID().uuidString
+        let name: String
+        let address: String
+        var coordinate: CLLocationCoordinate2D
+    }
+    @State private var annotations: [Annotation] = []
     @State var spot: Spot
     @EnvironmentObject var spotVM: SpotViewModel
+    @EnvironmentObject var locationManager: LocationManager
     @Environment(\.dismiss) private var dismiss
+    @State private var mapRegion = MKCoordinateRegion()
     @State private var showPlaceLookupSheet: Bool = false
+    let regionSize: CLLocationDistance = 500 //meters, value type has to be double/CL
     
     var body: some View {
         VStack{
+            
             Group {
                 TextField("Name", text: $spot.name)
                     .font(.title)
@@ -31,6 +43,24 @@ struct SpotDetailView: View {
             .padding(.horizontal)
             
             Spacer()
+            
+            Map(coordinateRegion: $mapRegion, showsUserLocation: true, annotationItems: annotations) { annotation in
+                MapAnnotation(coordinate: annotation.coordinate) {}
+            }
+            .onChange(of: spot) { _, _ in
+                annotations = [Annotation(name: spot.name, address: spot.address, coordinate: spot.coordinate)]
+                mapRegion.center = spot.coordinate
+            }
+        }
+        .onAppear{               //if data exist, show the data coordinate in the center of the map, else show current location as center
+            Task{ @MainActor in
+                if spot.id != nil {
+                    mapRegion = MKCoordinateRegion(center: spot.coordinate, latitudinalMeters: regionSize, longitudinalMeters: regionSize)
+                } else {
+                    mapRegion = MKCoordinateRegion(center: locationManager.location?.coordinate ?? CLLocationCoordinate2D(), latitudinalMeters: regionSize, longitudinalMeters: regionSize)
+                }
+            }
+            annotations = [Annotation(name: spot.name, address: spot.address, coordinate: spot.coordinate)]
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(spot.id == nil)
