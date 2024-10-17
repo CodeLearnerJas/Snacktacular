@@ -61,5 +61,6 @@ struct ListView: View {
     NavigationStack{
         ListView()
             .environmentObject(SpotViewModel())
+            .environmentObject(LocationManager())
     }
 }

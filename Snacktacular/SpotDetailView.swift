@@ -13,7 +13,6 @@ struct SpotDetailView: View {
     @EnvironmentObject var spotVM: SpotViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var showPlaceLookupSheet: Bool = false
-    @State var returnedPlace = Place(mapItem: MKMapItem())
     
     var body: some View {
         VStack{
