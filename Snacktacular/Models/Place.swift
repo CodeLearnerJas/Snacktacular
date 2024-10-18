@@ -7,6 +7,7 @@
 
 import Foundation
 import MapKit
+
 struct Place: Identifiable {
     let id = UUID().uuidString
     private var mapItem: MKMapItem
@@ -14,6 +15,7 @@ struct Place: Identifiable {
     init(mapItem: MKMapItem) {
         self.mapItem = mapItem
     } //passing in one by one the results in the results array when we put the searchText in the searchField and press Return
+    
     var name: String {
         self.mapItem.name ?? ""
     }
@@ -22,11 +24,11 @@ struct Place: Identifiable {
         var cityAndState: String = ""
         var address: String = ""
         
-        cityAndState = placemark.locality ?? ""
+        cityAndState = placemark.locality ?? "" //city
         if let state = placemark.administrativeArea {
             cityAndState = cityAndState.isEmpty ? state : "\(cityAndState), \(state)"
         }
-        address = placemark.subThoroughfare ?? ""
+        address = placemark.subThoroughfare ?? "" //address
         if let street = placemark.thoroughfare {
             address = address.isEmpty ? street : "\(address) \(street)"
         }

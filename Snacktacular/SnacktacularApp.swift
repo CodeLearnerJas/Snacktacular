@@ -3,7 +3,7 @@
 //  Snacktacular
 //
 //  Created by GuitarLearnerJas on 10/10/2024.
-//TODO: Debug why CPU overload
+
 
 import SwiftUI
 import FirebaseCore
@@ -28,6 +28,7 @@ struct SnacktacularApp: App {
             LoginView()
                 .environmentObject(spotVM)
                 .environmentObject(locationManager)
+
         }
     }
 }

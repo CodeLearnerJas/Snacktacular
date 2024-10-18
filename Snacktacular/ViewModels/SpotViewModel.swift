@@ -8,6 +8,8 @@
 import Foundation
 import FirebaseFirestore
 
+
+@MainActor
 class SpotViewModel: ObservableObject {
     @Published var spot = Spot()
     
@@ -15,7 +17,8 @@ class SpotViewModel: ObservableObject {
         let db = Firestore.firestore() //create instance of the database
         
         if let id = spot.id { //spot already exist, do save
-            do { try await db.collection("spots").document(id).setData(spot.dictionary)
+            do {
+                try await db.collection("spots").document(id).setData(spot.dictionary)
                 print("😎 Successfully Saved")
                 return true
             } catch {
@@ -23,7 +26,7 @@ class SpotViewModel: ObservableObject {
                 return false
             }
             
-        } else {
+        } else { //no id, add new spot
             do{
                 try await db.collection("spots").addDocument(data: spot.dictionary)
                 print("👍 Successfully Added")

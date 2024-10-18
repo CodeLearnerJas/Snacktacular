@@ -5,6 +5,7 @@
 //  Created by GuitarLearnerJas on 11/10/2024.
 //
 
+
 import SwiftUI
 import Firebase
 import FirebaseAuth
@@ -12,18 +13,20 @@ import FirebaseFirestore
 
 struct ListView: View {
     @FirestoreQuery(collectionPath: "spots") var spots: [Spot]
-    @Environment(\.dismiss) private var dismiss
     @State private var sheetPresented: Bool = false
-    
+    @Environment(\.dismiss) private var dismiss
+    //TODO: The listView now works fine if wrapped by NavigationStack, but need to fix the transaction between LoginView and ListView
     var body: some View {
-        List(spots) { spot in
-            NavigationLink {
-                SpotDetailView(spot: spot)
-            } label: {
-                Text(spot.name)
-                    .font(.title2)
+        NavigationStack{
+            List(spots) { spot in
+                NavigationLink {
+                    SpotDetailView(spot: spot)
+                } label: {
+                    Text(spot.name)
+                        .font(.title2)
+                }
             }
-        }
+            
             .listStyle(.plain)
             .navigationTitle("Snack Spots")
             .navigationBarBackButtonHidden()
@@ -55,6 +58,7 @@ struct ListView: View {
             }
         }
     }
+}
 
 
 #Preview {

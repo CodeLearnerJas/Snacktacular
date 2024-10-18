@@ -13,16 +13,17 @@ struct LoginView: View {
     enum Field {
         case email, password
     }
-    @FocusState private var focusedField: Field?
-    @State private var buttonDisabled: Bool = true
+    
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var alertMessage = ""
     @State private var showingAlert: Bool = false
-    @State private var path = NavigationPath()
+    @State private var buttonDisabled: Bool = true
+   @State private var presentSheet = false
+    @FocusState private var focusedField: Field?
     
     var body: some View {
-        NavigationStack(path: $path) {
+        VStack {
             Image("logo")
                 .resizable()
                 .scaledToFit()
@@ -79,12 +80,6 @@ struct LoginView: View {
             .tint(Color("SnackColor"))
             .font(.title2)
             .padding()
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(for: String.self) { view in
-                if view == "ListView" {
-                    ListView()
-                }
-            }
         }
         .alert(alertMessage, isPresented: $showingAlert) {
             Button(role: .cancel) {} label: {
@@ -94,8 +89,11 @@ struct LoginView: View {
         .onAppear{
             if Auth.auth().currentUser != nil {
                 print("Welcome back")
-                path.append("ListView")
+                presentSheet = true
             }
+        }
+        .fullScreenCover(isPresented: $presentSheet) {
+            ListView()
         }
         
     }
@@ -114,7 +112,7 @@ struct LoginView: View {
                 showingAlert = true
             } else {
                 print("😎 Thanks for your registration!")
-                path.append("ListView")
+                presentSheet = true
             }
         }
     }
@@ -126,7 +124,7 @@ struct LoginView: View {
                 showingAlert = true
             } else {
                 print("Successfully logged in!")
-                path.append("ListView")
+                presentSheet = true
             }
         }
     }
