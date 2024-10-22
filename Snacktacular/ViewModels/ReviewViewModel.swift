@@ -43,4 +43,21 @@ class ReviewViewModel: ObservableObject {
             }
         }
     }
+    
+    func deleteReview(spot: Spot, review: Review) async -> Bool {
+        let db = Firestore.firestore()
+        guard let SpotID = spot.id, let reviewID = review.id else { // Both 2 conditions have to be met
+            print("😎 ERROR: spot.id = \(spot.id ?? "nil") and review.id = \(review.id ?? "nil"). This should never happen")
+            return false
+        }
+        
+        do {
+            let _ = try await db.collection("spots").document(SpotID).collection("reviews").document(reviewID).delete()
+            print("🗑️ Reviews deleted")
+            return true
+        } catch {
+            print("Error deleting reviews: \(error.localizedDescription)")
+            return false
+        }
+    }
 }

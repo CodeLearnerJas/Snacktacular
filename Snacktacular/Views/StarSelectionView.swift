@@ -8,21 +8,25 @@
 import SwiftUI
 
 struct StarSelectionView: View {
-    @State var rating: Int
+
+    @Binding var rating: Int
+    @State var interactive = true //used to control whether the user are able to modify the stars
     let highestRating: Int = 5
     let unselected = Image(systemName: "star")
     let selected = Image(systemName: "star.fill")
-    let font: Font = .largeTitle
+    var font: Font = .largeTitle
     let fillColor: Color = .yellow
     let emptyColor: Color = .gray
     
     var body: some View {
         HStack{
             ForEach(1...highestRating, id:\.self) { i in
-               (i <= rating ? selected : unselected)
+                (i <= rating ? selected : unselected)
                     .foregroundStyle(i <= rating ? fillColor : emptyColor)
                     .onTapGesture {
-                        rating = i
+                        if interactive{
+                            rating = i
+                        } //only when it is allowed to modify
                     }
                     .font(font)
             }
@@ -31,5 +35,5 @@ struct StarSelectionView: View {
 }
 
 #Preview {
-    StarSelectionView(rating: 4)
+    StarSelectionView(rating: .constant(4))
 }

@@ -15,7 +15,7 @@ struct ListView: View {
     @FirestoreQuery(collectionPath: "spots") var spots: [Spot]
     @State private var sheetPresented: Bool = false
     @Environment(\.dismiss) private var dismiss
-    //TODO: The listView now works fine if wrapped by NavigationStack, but need to fix the transaction between LoginView and ListView
+    
     var body: some View {
         NavigationStack{
             List(spots) { spot in
