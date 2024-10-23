@@ -46,7 +46,10 @@ class SpotViewModel: ObservableObject {
             print("ERROR: No ID")
             return false }
         
-        let photoName = UUID().uuidString //This will be the name of the image file
+        var photoName = UUID().uuidString //This will be the name of the image file
+        if photo.id != nil {
+            photoName = photo.id! //if photo id already exist, use it as the photoName. This happens if we are updating an existing photo's descriptive info. It will resave the photo and overwrite the existing one.
+        }
         let storage = Storage.storage() //initialize the storage
         let storageRef = storage.reference().child("\(spotID)/\(photoName).jpeg")
         

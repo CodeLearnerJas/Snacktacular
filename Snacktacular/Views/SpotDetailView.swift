@@ -24,7 +24,9 @@ struct SpotDetailView: View {
     @EnvironmentObject var locationManager: LocationManager
     //'spots' isnt the right path for the data, will direct in onAppear instead
     @FirestoreQuery(collectionPath: "spots") var reviews: [Review]
+    @FirestoreQuery(collectionPath: "spots") var photos: [Photo]
     @State var spot: Spot
+    @State var newPhoto = Photo()
     @State private var showPlaceLookupSheet: Bool = false
     @State private var showReviewSheet: Bool = false
     @State private var showSaveAlert: Bool = false
@@ -46,7 +48,7 @@ struct SpotDetailView: View {
     }
     @Environment(\.dismiss) private var dismiss
     
-    var body: some View {
+    var body: some View { //TODO: FIX - when editing star or review, its not updating unless go further back to the listview
         VStack{
             Group {
                 TextField("Name", text: $spot.name)
@@ -72,6 +74,8 @@ struct SpotDetailView: View {
                 annotations = [Annotation(name: spot.name, address: spot.address, coordinate: spot.coordinate)]
                 mapRegion.center = spot.coordinate
             }
+            
+            SpotDetailPhotosScrollView(photos: photos, spot: spot)
             
             HStack{
                 Group {
@@ -100,6 +104,7 @@ struct SpotDetailView: View {
                                     if let uiImage = UIImage(data: data) {
                                         uiImageSelected = uiImage
                                         print("Successfully saved image")
+                                        newPhoto = Photo() //clears out contents if you add more than 1 photo in a row for this spot, if not the 2nd photo page description will have 1st's
                                         buttonPressed = .photo
                                         if spot.id == nil {
                                             showSaveAlert.toggle()
@@ -153,7 +158,10 @@ struct SpotDetailView: View {
         .onAppear {
             if !previewRunning && spot.id != nil {
                 $reviews.path = "spots/\(spot.id ?? "")/reviews"
-                print("reviews.path = \($reviews.path)")
+                print("reviews.path = \($reviews.path)") //update the firebase Database path to contain the 'reviews' subcollection
+                
+                $photos.path = "spots/\(spot.id ?? "")/photos"
+                print("reviews.path = \($reviews.path)") //update the firebase Database path to contain the 'photos' subcollection
             } else { //spot.id starts out as nil
                 showingAsSheet = true
                 print("Invalid spot ID: Cannot fetch reviews.")
@@ -221,11 +229,11 @@ struct SpotDetailView: View {
         }
         .sheet(isPresented: $showPhotoSheet) {
             NavigationStack{
-                PhotoView(uiImage: uiImageSelected, spot: spot)
+                PhotoView(uiImage: uiImageSelected, spot: spot, photo: $newPhoto)
             }
         }
         
-        .alert("Require Save before Rating", isPresented: $showSaveAlert) {
+        .alert("Require Save before Rating or Uploading Photos", isPresented: $showSaveAlert) {
             Button("Cancel", role: .cancel) {}
             Button("Save", role: .none) {
                 Task{
@@ -234,8 +242,7 @@ struct SpotDetailView: View {
                     if success {
                         //if we didnt update the path after saving spot, we wouldnt be able to show new reviews added
                         $reviews.path = "spots/\(spot.id ?? "")/reviews" //reset the path using newly created id
-                        //TODO: Add photos
-                        //$photos.path = "spots/\(spot.id ?? "")/photos"
+                        $photos.path = "spots/\(spot.id ?? "")/photos"
                         
                         switch buttonPressed {
                         case .review:
@@ -250,7 +257,7 @@ struct SpotDetailView: View {
                 }
             }
         } message: {
-            Text("Please save your spot before rating")
+            Text("Please save before rating or uploading photos")
         }
         
     }

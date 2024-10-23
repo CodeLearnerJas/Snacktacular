@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAuth
 
 struct PhotoView: View {
     var uiImage: UIImage
     var spot: Spot
-    @State private var photo = Photo()
+    @Binding var photo: Photo //if use @State, the photo become Local, any change will remain inside PhotoView
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var spotVM : SpotViewModel
     
@@ -27,6 +29,7 @@ struct PhotoView: View {
                 
                 TextField("Description", text: $photo.description)
                     .textFieldStyle(.roundedBorder)
+                    .disabled(Auth.auth().currentUser?.email != photo.reviewer) //if the current user is not the one who posted, disable the description to become non-editable
                 
                 Text("by: \(photo.reviewer) on: \(photo.postedOn.formatted(date: .numeric, time: .omitted))")
                     .lineLimit(1)
@@ -34,19 +37,26 @@ struct PhotoView: View {
             }
             .padding()
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
+                if Auth.auth().currentUser?.email == photo.reviewer {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
                     }
-                }
-                ToolbarItem(placement: .automatic) {
-                    Button("Save") {
-                        Task{
-                            //action save
-                            let success = await spotVM.saveImage(spot: spot, photo: photo, image: uiImage)
-                            if success{
-                                dismiss()
+                    ToolbarItem(placement: .automatic) {
+                        Button("Save") {
+                            Task{
+                                let success = await spotVM.saveImage(spot: spot, photo: photo, image: uiImage)
+                                if success{
+                                    dismiss()
+                                }
                             }
+                        }
+                    }
+                } else {
+                    ToolbarItem(placement: .automatic) {
+                        Button("Back") {
+                            dismiss()
                         }
                     }
                 }
@@ -57,7 +67,7 @@ struct PhotoView: View {
 
 #Preview {
     NavigationStack{
-        PhotoView(uiImage: UIImage(named: "pizza") ?? UIImage(), spot: Spot())
+        PhotoView(uiImage: UIImage(named: "pizza") ?? UIImage(), spot: Spot(), photo: .constant(Photo()))
             .environmentObject(SpotViewModel())
     }
 }
